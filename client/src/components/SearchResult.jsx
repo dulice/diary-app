@@ -30,6 +30,8 @@ const SearchResult = () => {
         fetchData();
     },[searchInput, sortby]);
 
+  const searchQuery = diaries?.filter(diary => diary.title.includes(searchInput) || diary.description.includes(searchInput));
+
   return (
     <div>
       <Header />
@@ -37,16 +39,30 @@ const SearchResult = () => {
           <div className="">
             {loading ?<div>loading...</div>
             : (
-              diaries.map((diary) => (
-                <motion.div 
-                  variants={diariesCardVariant}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  key={diary._id} className="h-44 w-full bg-gray-300 p-3 mt-3 rounded-sm">
-                  <Diary diary={diary}/>
-                </motion.div>
-              ))
+              searchQuery.length !== 0
+              ? (
+                searchQuery.map((diary) => (
+                  <motion.div 
+                    variants={diariesCardVariant}
+                    initial="hidden"
+                    animate="visible"
+                    whileHover="hover"
+                    key={diary._id} className="h-44 w-full bg-gray-300 p-3 mt-3 rounded-sm">
+                    <Diary diary={diary}/>
+                  </motion.div>
+                ))
+              ) : (
+                diaries.map((diary) => (
+                  <motion.div 
+                    variants={diariesCardVariant}
+                    initial="hidden"
+                    animate="visible"
+                    whileHover="hover"
+                    key={diary._id} className="h-44 w-full bg-gray-300 p-3 mt-3 rounded-sm">
+                    <Diary diary={diary}/>
+                  </motion.div>
+                ))
+              )
             )}
           </div>
           <Link to='/writediary'>
