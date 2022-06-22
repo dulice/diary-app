@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import Diary from './Diary';
 import { diariesButton, diariesCardVariant } from './Variant';
 
-const Diaries = () => {
+const Diaries = ({handleSetMode}) => {
   const [diaries, setDiaries] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -22,9 +22,9 @@ const Diaries = () => {
   },[setLoading, setDiaries]);
   
   return (
-    <div>
-      <Header />
-        <div className="max-w-6xl mx-auto px-2">
+    <div className='bg-white dark:bg-gray-900 min-h-screen'>
+      <Header handleSetMode={handleSetMode}/>
+        <div className="max-w-6xl mx-auto px-2 overflow-x-hidden">
           <div className="">
             {loading ?<div>loading...</div>
             : (
@@ -34,7 +34,7 @@ const Diaries = () => {
                   initial="hidden"
                   animate="visible"
                   whileHover="hover"
-                  key={diary._id} className="h-44 w-full bg-gray-300 p-3 mt-3 rounded-sm">
+                  key={diary._id} className="h-44 w-full bg-gray-300 dark:bg-gray-800 p-3 mt-3 rounded-sm">
                   <Diary diary={diary}/>
                 </motion.div>
               ))

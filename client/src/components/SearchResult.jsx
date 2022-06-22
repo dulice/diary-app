@@ -8,9 +8,9 @@ import { motion } from 'framer-motion';
 import Diary from './Diary';
 import { diariesButton, diariesCardVariant } from './Variant';
 
-const SearchResult = () => {
+const SearchResult = ({handleSetMode}) => {
     const {search} = useLocation();
-    const searchInput = new URLSearchParams(search).get('q');
+    let searchInput = new URLSearchParams(search).get('q');
     const sortby = new URLSearchParams(search).get('sortby');
     // console.log(sortby);
     const [diaries, setDiaries] = useState([]);
@@ -29,13 +29,14 @@ const SearchResult = () => {
         }
         fetchData();
     },[searchInput, sortby]);
-
-  const searchQuery = diaries?.filter(diary => diary.title.includes(searchInput) || diary.description.includes(searchInput));
+  
+  searchInput = new RegExp(searchInput, 'i');
+  const searchQuery = diaries?.filter(diary => searchInput.test(diary.title) || searchInput.test(diary.description));
 
   return (
-    <div>
-      <Header />
-        <div className="max-w-6xl mx-auto px-2">
+    <div className='dark:bg-gray-900 dark:text-white min-h-screen'>
+      <Header handleSetMode={handleSetMode}/>
+        <div className="max-w-6xl mx-auto px-2 ">
           <div className="">
             {loading ?<div>loading...</div>
             : (
@@ -47,7 +48,7 @@ const SearchResult = () => {
                     initial="hidden"
                     animate="visible"
                     whileHover="hover"
-                    key={diary._id} className="h-44 w-full bg-gray-300 p-3 mt-3 rounded-sm">
+                    key={diary._id} className="h-44 w-full bg-gray-300 p-3 mt-3 rounded-sm dark:bg-gray-800">
                     <Diary diary={diary}/>
                   </motion.div>
                 ))
@@ -58,7 +59,7 @@ const SearchResult = () => {
                     initial="hidden"
                     animate="visible"
                     whileHover="hover"
-                    key={diary._id} className="h-44 w-full bg-gray-300 p-3 mt-3 rounded-sm">
+                    key={diary._id} className="h-44 w-full bg-gray-300 p-3 mt-3 rounded-sm dark:bg-gray-800">
                     <Diary diary={diary}/>
                   </motion.div>
                 ))

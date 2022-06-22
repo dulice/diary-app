@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react'
-import { GrClose } from 'react-icons/gr'
 import { AiFillPicture } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-date-picker';
@@ -8,6 +7,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/solid';
 import { motion } from 'framer-motion';
 import { addButton, cardVariant } from './Variant';
+import { AiOutlineClose } from 'react-icons/ai'
 
 const moods = [
     {name: "Normal", emoji: "😃"},
@@ -72,15 +72,19 @@ const WriteDiary = () => {
         }     
     }
   return (
-    <div className='mt-5'>
+    <div className='pt-5 dark:bg-gray-900 dark:text-white min-h-screen'>
         {loading 
         ? (
             <form className="max-w-6xl mx-auto px-2" onSubmit={handleSubmit}>
             <div className="flex justify-between items-center py-2 mb-3">
-                <Link to="/">
-                    <motion><GrClose/></motion>
+                <Link to="/" className='ml-3 mt-2 text-2xl'>
+                    <motion.button
+                        variants={addButton}
+                        initial="hidden"
+                        animate="visible"
+                        whileHover="hover"
+                    ><AiOutlineClose/></motion.button>
                 </Link>
-                
                 <div>
                     <button className="bg-blue-400 rounded-sm px-2 py-1 text-white">Saving...</button>
                 </div>
@@ -99,14 +103,14 @@ const WriteDiary = () => {
                                 leaveTo='opacity-0'
                             >
                                 <Listbox.Options className="absolute bg-slate-300 w-64 rounded-sm mt-3">
-                                    <span className='font-medium text-lg pl-3'>How do you feel today?</span>
+                                    <span className='font-medium text-lg pl-3 dark:bg-gray-600'>How do you feel today?</span>
                                     {moods.map((mood) => (
                                         <Listbox.Option
                                             key={mood.name}
                                             value={mood}
                                             className={({ active }) =>
                                                 `relative select-none py-2 pl-3 cursor-pointer ${
-                                                active ? 'bg-blue-500' : 'bg-slate-300'
+                                                active ? 'bg-blue-500' : 'bg-slate-300 dark:bg-gray-600'
                                                 }`
                                             }                                       
                                         >
@@ -130,7 +134,7 @@ const WriteDiary = () => {
                         </div>
                     </Listbox>
                 </div>
-                <DatePicker disabled value={date} onChange={setDate}/>
+                <DatePicker disabled value={date} onChange={setDate} className="dark:text-white"/>
                 
             </div>
             <div className='my-3'>
@@ -140,7 +144,7 @@ const WriteDiary = () => {
                     onChange={(e) => setTitle(e.target.value)}
                     type="text" 
                     placeholder='Title' 
-                    className='font-medium text-xl focus:outline-none block text-gray-600'
+                    className='font-medium text-xl focus:outline-none block text-gray-600 dark:bg-gray-900 dark:text-gray-400'
                     required
                 />
 
@@ -153,7 +157,7 @@ const WriteDiary = () => {
                     required
                     value={description} 
                     onChange={(e) => setDescription(e.target.value)}
-                    rows="10" placeholder='Write more here...' className='text-gray-600 w-full my-4 focus:outline-none'></textarea>
+                    rows="10" placeholder='Write more here...' className='text-gray-600 w-full my-4 focus:outline-none dark:bg-gray-900 dark:text-gray-400'></textarea>
             </div>
         </form>
         )
@@ -161,13 +165,13 @@ const WriteDiary = () => {
             
         <form className="max-w-6xl mx-auto px-2" onSubmit={handleSubmit}>
             <div className="flex justify-between items-center py-2 mb-3">
-                <Link to="/">
+                <Link to="/" className='ml-3 mt-2 text-2xl'>
                     <motion.button
                         variants={addButton}
                         initial="hidden"
                         animate="visible"
                         whileHover="hover"
-                    ><GrClose className='text-2xl'/></motion.button>
+                    ><AiOutlineClose/></motion.button>
                 </Link>
                 
                 <div>
@@ -197,7 +201,7 @@ const WriteDiary = () => {
                                     leaveFrom='opacity-100'
                                     leaveTo='opacity-0'
                                 >
-                                    <Listbox.Options className="absolute bg-slate-300 w-64 rounded-sm mt-3">
+                                    <Listbox.Options className="absolute bg-slate-300 w-64 rounded-sm mt-3 dark:bg-gray-600">
                                         <span className='font-medium text-lg pl-3'>How do you feel today?</span>
                                         {moods.map((mood) => (
                                             <Listbox.Option
@@ -205,7 +209,7 @@ const WriteDiary = () => {
                                                 value={mood}
                                                 className={({ active }) =>
                                                     `relative select-none py-2 pl-3 cursor-pointer ${
-                                                    active ? 'bg-blue-500' : 'bg-slate-300'
+                                                    active ? 'bg-blue-500' : 'bg-slate-300 dark:bg-gray-600'
                                                     }`
                                                 }                                       
                                             >
@@ -229,7 +233,7 @@ const WriteDiary = () => {
                             </div>
                         </Listbox>
                     </div>
-                    <DatePicker value={date} onChange={setDate}/>
+                    <DatePicker value={date} onChange={setDate} className="dark:text-white"/>
                     
                 </div>
                 <div className='my-3'>
@@ -238,17 +242,17 @@ const WriteDiary = () => {
                         onChange={(e) => setTitle(e.target.value)}
                         type="text" 
                         placeholder='Title' 
-                        className='font-medium text-xl focus:outline-none block'
+                        className='font-medium text-xl focus:outline-none block dark:bg-gray-900'
                     />
 
-                    <label htmlFor="image" className='text-3xl'><AiFillPicture/></label>
+                    <label htmlFor="image" className='text-3xl my-3'><AiFillPicture/></label>
                     <input type="file" id="image" name="image" onChange={e => handleChangeImage(e)} className="hidden" />
 
                     {file && <img src={image} alt="" className='my-4' />}
                     <textarea 
                         value={description} 
                         onChange={(e) => setDescription(e.target.value)}
-                        rows="10" placeholder='Write more here...' className='w-full my-4 focus:outline-none'></textarea>
+                        rows="10" placeholder='Write more here...' className='w-full my-4 focus:outline-none dark:bg-gray-900'></textarea>
                 </div>
             </motion.div>
         </form>
