@@ -4,14 +4,30 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.react-calendar {
+  @apply dark:bg-gray-800 !important;
+}
+.react-date-picker__button {
+  @apply dark:bg-gray-300 !important;
+}
+.description {
+  @apply h-12 leading-6 text-ellipsis overflow-hidden text-gray-600 dark:text-gray-400 relative text-lg mt-4
+ after:bg-gray-300 after:dark:bg-gray-800
+}
+.description::after {
+  content: ". . .";
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }

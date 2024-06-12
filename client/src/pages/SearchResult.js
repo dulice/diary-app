@@ -1,12 +1,11 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { BsFillPlusCircleFill} from 'react-icons/bs';
-import { Link } from 'react-router-dom'
-import Header from './header';
 import { motion } from 'framer-motion';
-import Diary from './Diary';
-import { diariesButton, diariesCardVariant } from './Variant';
+import Header from '../components/header';
+import Diary from '../components/Diary';
+import { diariesCardVariant } from '../components/Variant';
+import PlusBtn from '../components/PlusBtn';
 
 const SearchResult = ({handleSetMode}) => {
     const {search} = useLocation();
@@ -53,30 +52,13 @@ const SearchResult = ({handleSetMode}) => {
                   </motion.div>
                 ))
               ) : (
-                diaries.map((diary) => (
-                  <motion.div 
-                    variants={diariesCardVariant}
-                    initial="hidden"
-                    animate="visible"
-                    whileHover="hover"
-                    key={diary._id} className="h-44 w-full bg-gray-300 p-3 mt-3 rounded-sm dark:bg-gray-800">
-                    <Diary diary={diary}/>
-                  </motion.div>
-                ))
+                <div className='bg-red-400 p-4 mt-4'>
+                    No results found. <Link to="/" className='underline'>Go to homepage</Link>
+                </div>
               )
             )}
           </div>
-          <Link to='/writediary'>
-            <motion.button 
-              variants={diariesButton}
-              initial="hidden"
-              animate="visible"
-              whileHover="hover"
-              whileFocus="hover"
-              className='fixed bottom-10 inset-x-1/2 translate-x-1/2'>
-                <BsFillPlusCircleFill className='text-blue-500 text-5xl hover:text-blue-600 duration-500'/>
-            </motion.button>
-          </Link>
+          <PlusBtn />
         </div>
     </div>
   )

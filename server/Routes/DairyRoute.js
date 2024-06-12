@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Diary = require('../models/Diary');
+const cloudinary = require('../utils/cloudinary');
 
 router.get('/', async (req, res) => {
     try {
@@ -65,6 +66,12 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
+        const diary = await Diary.findById(req.params.id);
+        if(diary.image.public_id) {
+            await cloudinary.uploader.destroy(diary.image.public_id, (result) => {
+                console.log(result);
+            })
+        }
         await Diary.findByIdAndDelete(req.params.id);
         res.status(200).json({message: "Delete Successfully"});
     } catch (err) {

@@ -24,12 +24,20 @@ export const cardVariant = {
       y: "-100vh"
     },
     visible: {
-      y: "0"
+      y: "0",
+      transition: {
+        duration: 0.5,
+        type : "Spring",
+        stiffness: 300,
+      },
     },
-    transition: {
-      duration: 1,
-      type : "Spring",
-       stiffness: 300,
+    exit: {
+      y: "-100vh",
+      transition: {
+        duration: 0.5,
+        type : "Spring",
+        stiffness: 300,
+      },
     },
   }
 
@@ -38,12 +46,12 @@ export const cardVariant = {
       scale: 0
     },
     visible: {
-      scale: 1
-    },
-    transition: {
-      duration: .5,
-      type : "Spring",
-       stiffness: 300,
+      scale: 1,
+      transition: {
+        duration: .5,
+        type : "Spring",
+        stiffness: 300,
+      },
     },
     hover: {
       scale: 1.05,
@@ -59,12 +67,20 @@ export const cardVariant = {
       opacity: 0
     },
     visible: {
-      opacity: 1
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        type : "Spring",
+        stiffness: 300,
+      },
     },
-    transition: {
-      duration: 1,
-      type : "Spring",
-       stiffness: 300,
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.5,
+        type : "Spring",
+        stiffness: 300,
+      },
     },
     hover: {
       scale: 1.01,

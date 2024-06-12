@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Diaries from "./components/Diaries";
-import SearchResult from "./components/SearchResult";
-import SingleDiary from "./components/SingleDiary";
-import WriteDiary from "./components/WriteDiary";
+import Diaries from "./pages/Diaries";
+import SingleDiary from "./pages/SingleDiary";
+import SearchResult from "./pages/SearchResult";
+import WriteDiary from "./pages/WriteDiary";
 
 function App() {
   const [mode, setMode] = useState(false);

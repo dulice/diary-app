@@ -16,8 +16,9 @@ const diarySchema = new mongoose.Schema({
         required: true,
     },
     image: {
-        type: String
-    }
+        photo: {type: String},
+        public_id: {type: String},
+    },
 },{timestamps: true});
 
 const Diary = mongoose.model('Diary', diarySchema);
